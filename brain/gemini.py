@@ -1,8 +1,10 @@
 # ==========================
 # Deek Brain
 # Gemini AI
-# Version: 2.0
+# Version: 3.0
 # ==========================
+
+import time
 
 from google import genai
 from config import API_KEY, MODEL_NAME
@@ -19,46 +21,83 @@ class DeekBrain:
 
     def ask(self, question):
 
-        try:
+        retries = 3
 
-            response = self.client.models.generate_content(
-                model=MODEL_NAME,
-                contents=question
-            )
+        for attempt in range(retries):
 
-            return response.text.strip()
+            try:
 
-        except Exception as e:
-
-            error = str(e)
-
-            if "503" in error:
-                return (
-                    "Sorry Boss! Gemini is currently experiencing high demand.\n"
-                    "Please try again in a few moments."
+                response = self.client.models.generate_content(
+                    model=MODEL_NAME,
+                    contents=question
                 )
 
-            elif "404" in error:
-                return (
-                    "Sorry Boss! The configured AI model is unavailable."
-                )
+                return response.text.strip()
 
-            elif "401" in error or "403" in error:
-                return (
-                    "Sorry Boss! There is a problem with the Gemini API key."
-                )
+            except Exception as e:
 
-            elif "timeout" in error.lower():
-                return (
-                    "Sorry Boss! The request timed out. Please try again."
-                )
+                error = str(e)
 
-            elif "connection" in error.lower():
-                return (
-                    "Sorry Boss! I couldn't connect to the internet."
-                )
+                # Retry on temporary server overload
+                if "503" in error:
 
-            else:
-                return (
-                    f"Unexpected Error:\n{error}"
-                )
+                    if attempt < retries - 1:
+                        time.sleep(2)
+                        continue
+
+                    return (
+                        "Sorry Boss! Gemini is currently experiencing high demand.\n"
+                        "Please try again in a few moments."
+                    )
+
+                # Quota exceeded
+                elif "429" in error or "RESOURCE_EXHAUSTED" in error:
+
+                    return (
+                        "Boss, I've reached my current AI usage limit.\n\n"
+                        "Please try again later or use another Gemini API key."
+                    )
+
+                # Model not found
+                elif "404" in error:
+
+                    return (
+                        "Sorry Boss! The configured AI model is unavailable."
+                    )
+
+                # Invalid API key
+                elif "401" in error or "403" in error:
+
+                    return (
+                        "Sorry Boss! There is a problem with the Gemini API key."
+                    )
+
+                # Timeout
+                elif "timeout" in error.lower():
+
+                    return (
+                        "Sorry Boss! The AI service took too long to respond."
+                    )
+
+                # Internet problem
+                elif (
+                    "connection" in error.lower()
+                    or "network" in error.lower()
+                ):
+
+                    return (
+                        "Sorry Boss! I couldn't connect to the AI service.\n"
+                        "Please check your internet connection."
+                    )
+
+                # Any other error
+                else:
+
+                    return (
+                        "Unexpected Error:\n\n"
+                        f"{error}"
+                    )
+
+        return (
+            "Sorry Boss! Something went wrong."
+        )
