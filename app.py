@@ -1,38 +1,36 @@
 # ==========================
-# Deek v1.0
+# Deek v1.1
 # Main Application
 # ==========================
 
-from brain import DeekBrain
+from controller import DeekController
 
 
 def main():
 
     print("=" * 35)
-    print("🤖 Deek v1.0")
+    print("🤖 Deek v1.1")
     print("=" * 35)
 
     print("\nHi Boss! 👋")
     print("Type 'exit' to quit.\n")
 
-    brain = DeekBrain()
+    deek = DeekController()
 
     while True:
 
         question = input("You: ").strip()
 
         if question.lower() in [
-
             "exit",
             "quit",
             "bye"
-
         ]:
 
             print("\nDeek: Goodbye Boss! 👋")
             break
 
-        answer = brain.ask(question)
+        answer = deek.process(question)
 
         print("\nDeek:")
         print(answer)
