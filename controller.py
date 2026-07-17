@@ -31,6 +31,7 @@ class DeekController:
             contact = q[5:].strip()
 
             return {
+                 "type": "action",
                 "action": "CALL",
                 "contact": contact
             }
@@ -39,10 +40,11 @@ class DeekController:
 
             contact = q[9:].strip()
 
-            return {
-                "action": "WHATSAPP",
+           return {
+                "type": "action",
+               "action": "WHATSAPP",
                 "contact": contact
-            }
+           }
 
         if q.lower().startswith("navigate to "):
 
