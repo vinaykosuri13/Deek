@@ -1,7 +1,7 @@
 # ==========================
 # Deek Brain
 # Gemini AI
-# Version: 3.0
+# Version: 3.1
 # ==========================
 
 import time
@@ -47,7 +47,7 @@ class DeekBrain:
                 elif "429" in error or "RESOURCE_EXHAUSTED" in error:
 
                     return (
-                        "Boss, I've reached my current AI usage limit.\n\n"
+                        "Boss, I've reached my current AI usage limit.\n"
                         "Please try again later or use another Gemini API key."
                     )
 
@@ -60,4 +60,13 @@ class DeekBrain:
                 elif "401" in error or "403" in error:
 
                     return (
-                        "Boss, there is a problem with
+                        "Boss, there is a problem with the Gemini API key."
+                    )
+
+                else:
+
+                    return (
+                        f"Unexpected Error:\n{error}"
+                    )
+
+        return "Unknown error."
