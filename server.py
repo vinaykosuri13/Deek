@@ -1,18 +1,18 @@
-
 # ==========================
 # Deek API Server
-# Version: 1.0
+# Version: 2.0
 # ==========================
+
+from typing import Optional
 
 from fastapi import FastAPI
 from pydantic import BaseModel
 
 from controller import DeekController
 
-
 app = FastAPI(
     title="Deek AI",
-    version="1.0"
+    version="2.0"
 )
 
 controller = DeekController()
@@ -23,24 +23,38 @@ class ChatRequest(BaseModel):
 
 
 class ChatResponse(BaseModel):
-    reply: str
+    type: str
+    reply: Optional[str] = None
+    action: Optional[str] = None
+    contact: Optional[str] = None
+    destination: Optional[str] = None
+    text: Optional[str] = None
 
 
 @app.get("/")
 def home():
-
     return {
         "status": "running",
         "name": "Deek AI",
-        "version": "1.0"
+        "version": "2.0"
     }
 
 
 @app.post("/chat", response_model=ChatResponse)
 def chat(request: ChatRequest):
 
-    answer = controller.process(request.message)
+    result = controller.process(request.message)
+
+    if isinstance(result, dict):
+        return ChatResponse(
+            type="action",
+            action=result.get("action"),
+            contact=result.get("contact"),
+            destination=result.get("destination"),
+            text=result.get("text")
+        )
 
     return ChatResponse(
-        reply=answer
+        type="chat",
+        reply=result
     )
