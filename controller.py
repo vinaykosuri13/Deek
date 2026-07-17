@@ -1,6 +1,6 @@
 # ==========================
 # Deek Controller
-# Version: 3.0
+# Version: 4.0
 # ==========================
 
 from brain import DeekBrain
@@ -19,6 +19,43 @@ class DeekController:
         self.tools = ToolEngine()
 
     def process(self, question):
+
+        q = question.strip()
+
+        # --------------------------
+        # PHONE ACTIONS
+        # --------------------------
+
+        if q.lower().startswith("call "):
+
+            contact = q[5:].strip()
+
+            return {
+                "action": "CALL",
+                "contact": contact
+            }
+
+        if q.lower().startswith("whatsapp "):
+
+            contact = q[9:].strip()
+
+            return {
+                "action": "WHATSAPP",
+                "contact": contact
+            }
+
+        if q.lower().startswith("navigate to "):
+
+            destination = q[12:].strip()
+
+            return {
+                "action": "MAPS",
+                "destination": destination
+            }
+
+        # --------------------------
+        # INTENT ENGINE
+        # --------------------------
 
         intent = self.intent.detect(question)
 
