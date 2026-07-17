@@ -40,7 +40,7 @@ class DeekController:
 
             contact = q[9:].strip()
 
-           return {
+            return {
                 "type": "action",
                "action": "WHATSAPP",
                 "contact": contact
