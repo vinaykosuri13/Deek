@@ -65,6 +65,25 @@ class DeekController:
                  "action": "MAPS",
                  "destination": destination
             }
+         if q.lower().startswith("open "):
+
+            site = q[5:].strip()
+
+            return {
+                 "type": "action",
+                 "action": "OPEN",
+                 "site": site
+            }
+
+         if q.lower().startswith("website "):
+
+            site = q[8:].strip()
+
+            return {
+                 "type": "action",
+                 "action": "OPEN",
+                 "site": site
+           }  
 
         # --------------------------
         # INTENT ENGINE
