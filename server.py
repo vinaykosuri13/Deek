@@ -28,6 +28,7 @@ class ChatResponse(BaseModel):
     action: Optional[str] = None
     contact: Optional[str] = None
     destination: Optional[str] = None
+    site: Optional[str] = None
     text: Optional[str] = None
 
 
@@ -51,6 +52,7 @@ def chat(request: ChatRequest):
             action=result.get("action"),
             contact=result.get("contact"),
             destination=result.get("destination"),
+            site=result.get("site"),
             text=result.get("text")
         )
 
