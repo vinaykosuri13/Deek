@@ -46,14 +46,25 @@ class DeekController:
                 "contact": contact
            }
 
-        if q.lower().startswith("navigate to "):
+        if q.lower().startswith("navigate "):
 
-            destination = q[12:].strip()
+           destination = q[9:].strip()
 
             return {
+                "type": "action",
                 "action": "MAPS",
                 "destination": destination
             }
+
+        if q.lower().startswith("maps "):
+
+            destination = q[5:].strip()
+
+            return {
+                 "type": "action",
+                 "action": "MAPS",
+                 "destination": destination
+             }
 
         # --------------------------
         # INTENT ENGINE
