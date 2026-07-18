@@ -50,11 +50,11 @@ class DeekController:
 
            destination = q[9:].strip()
 
-            return {
+           return {
                 "type": "action",
                 "action": "MAPS",
                 "destination": destination
-            }
+           }
 
         if q.lower().startswith("maps "):
 
@@ -64,7 +64,7 @@ class DeekController:
                  "type": "action",
                  "action": "MAPS",
                  "destination": destination
-             }
+            }
 
         # --------------------------
         # INTENT ENGINE
