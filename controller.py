@@ -89,6 +89,31 @@ class DeekController:
               "action": "FLASHLIGHT",
               "state": "OFF"
            }
+         # Volume Control
+        if "increase volume" in q or "volume up" in q:
+           return {
+              "type": "action",
+              "action": "VOLUME",
+              "level": "UP"
+          }
+         if "decrease volume" in q or "volume down" in q:
+           return {
+              "type": "action",
+              "action": "VOLUME",
+              "level": "DOWN"
+          }
+         if "mute" in q or "silent mode" in q:
+           return {
+              "type": "action",
+              "action": "VOLUME",
+              "level": "MUTE"
+          }
+         if "maximum volume" in q or "max volume" in q:
+           return {
+              "type": "action",
+              "action": "VOLUME",
+              "level": "MAX"
+          }
         
         # Alarm
         match = re.match(
