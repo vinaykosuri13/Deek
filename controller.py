@@ -21,6 +21,7 @@ class DeekController:
     def process(self, question):
 
         q = question.strip()
+        ql = q.lower()
 
         # --------------------------
         # PHONE ACTIONS
@@ -90,25 +91,25 @@ class DeekController:
               "state": "OFF"
            }
          # Volume Control
-        if "increase volume" in q or "volume up" in q:
+        if "increase volume" in q1 or "volume up" in q1:
            return {
               "type": "action",
               "action": "VOLUME",
               "level": "UP"
           }
-        if "decrease volume" in q or "volume down" in q:
+        if "decrease volume" in q1 or "volume down" in q1:
            return {
               "type": "action",
               "action": "VOLUME",
               "level": "DOWN"
           }
-        if "mute" in q or "silent mode" in q:
+        if "mute" in q1 or "silent mode" in q1:
            return {
               "type": "action",
               "action": "VOLUME",
               "level": "MUTE"
           }
-        if "maximum volume" in q or "max volume" in q:
+        if "maximum volume" in q1 or "max volume" in q1:
            return {
               "type": "action",
               "action": "VOLUME",
