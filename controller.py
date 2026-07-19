@@ -91,25 +91,25 @@ class DeekController:
               "state": "OFF"
            }
          # Volume Control
-        if "increase volume" in q1 or "volume up" in q1:
+        if "increase volume" in ql or "volume up" in ql:
            return {
               "type": "action",
               "action": "VOLUME",
               "level": "UP"
           }
-        if "decrease volume" in q1 or "volume down" in q1:
+        if "decrease volume" in ql or "volume down" in ql:
            return {
               "type": "action",
               "action": "VOLUME",
               "level": "DOWN"
           }
-        if "mute" in q1 or "silent mode" in q1:
+        if "mute" in ql or "silent mode" in ql:
            return {
               "type": "action",
               "action": "VOLUME",
               "level": "MUTE"
           }
-        if "maximum volume" in q1 or "max volume" in q1:
+        if "maximum volume" in ql or "max volume" in ql:
            return {
               "type": "action",
               "action": "VOLUME",
