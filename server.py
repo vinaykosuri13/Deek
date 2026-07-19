@@ -30,6 +30,7 @@ class ChatResponse(BaseModel):
     destination: Optional[str] = None
     site: Optional[str] = None
     app: Optional[str] = None
+    state: Optional[str] = None
     text: Optional[str] = None
 
 
@@ -55,6 +56,7 @@ def chat(request: ChatRequest):
             destination=result.get("destination"),
             site=result.get("site"),
             app=result.get("app"),
+            state=result.get("state"),
             text=result.get("text")
         )
 
