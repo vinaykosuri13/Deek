@@ -74,7 +74,6 @@ class DeekController:
                  "action": "OPEN",
                  "site": site
             }
-
         if q.lower().startswith("website "):
 
             site = q[8:].strip()
@@ -84,7 +83,7 @@ class DeekController:
                  "action": "OPEN",
                  "site": site
             }  
-                if q.lower().startswith("app "):
+        if q.lower().startswith("app "):
 
             app = q[4:].strip()
 
