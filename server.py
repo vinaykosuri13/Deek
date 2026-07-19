@@ -31,6 +31,7 @@ class ChatResponse(BaseModel):
     site: Optional[str] = None
     app: Optional[str] = None
     state: Optional[str] = None
+    level: Optional[str] = None
     time: Optional[str] = None
     text: Optional[str] = None
 
@@ -58,6 +59,7 @@ def chat(request: ChatRequest):
             site=result.get("site"),
             app=result.get("app"),
             state=result.get("state"),
+            level=result.get("level"), 
             time=result.get("time"),
             text=result.get("text")
         )
