@@ -7,7 +7,7 @@ from brain import DeekBrain
 from memory import Memory
 from intent import IntentEngine
 from tools import ToolEngine
-
+import re
 
 class DeekController:
 
@@ -89,7 +89,7 @@ class DeekController:
               "action": "FLASHLIGHT",
               "state": "OFF"
            }
-        import re
+        
         # Alarm
         match = re.match(
             r"(?:set (?:an )?alarm(?: for)?|wake me up at)\s+(.+)",
