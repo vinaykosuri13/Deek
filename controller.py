@@ -89,6 +89,21 @@ class DeekController:
               "action": "FLASHLIGHT",
               "state": "OFF"
            }
+        import re
+        # Alarm
+        match = re.match(
+            r"(?:set (?:an )?alarm(?: for)?|wake me up at)\s+(.+)",
+            q.lower()
+        )
+
+        if match:
+            alarm_time = match.group(1).strip()
+
+            return {
+               "type": "action",
+               "action": "ALARM",
+               "time": alarm_time
+            }
         if q.lower().startswith("open "):
 
             site = q[5:].strip()
