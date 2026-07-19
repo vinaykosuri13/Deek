@@ -84,6 +84,25 @@ class DeekController:
                  "action": "OPEN",
                  "site": site
             }  
+                if q.lower().startswith("app "):
+
+            app = q[4:].strip()
+
+            return {
+                "type": "action",
+                "action": "APP",
+                "app": app
+            }
+
+        if q.lower().startswith("open app "):
+
+            app = q[9:].strip()
+
+            return {
+                "type": "action",
+                "action": "APP",
+                "app": app
+            }
 
         # --------------------------
         # INTENT ENGINE
