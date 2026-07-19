@@ -65,6 +65,30 @@ class DeekController:
                  "action": "MAPS",
                  "destination": destination
             }
+        # Flashlight
+        if q.lower() in [
+            "flashlight on",
+            "torch on",
+            "turn on flashlight",
+            "turn on torch"
+        ]:
+            return {
+                "type": "action",
+                "action": "FLASHLIGHT",
+                "state": "ON"
+            }
+
+        if q.lower() in [
+           "flashlight off",
+           "torch off",
+           "turn off flashlight",
+           "turn off torch"
+        ]:
+           return {
+              "type": "action",
+              "action": "FLASHLIGHT",
+              "state": "OFF"
+           }
         if q.lower().startswith("open "):
 
             site = q[5:].strip()
